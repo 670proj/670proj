@@ -54,13 +54,17 @@ def pad_matrix(i):
         if len(word_list)<= 500:
             padding_num = 500 - len(word_list)
             for j in range(padding_num):
-                zero_row = np.zeros((1,100)).tolist()
+                zero_row = [0] * 100
                 word_list.append(zero_row)
-            return np.matrix(word_list)
+            return np.expand_dims(np.array(word_list), axis=2)
         else:
             word_list = word_list[0:500]
-            return np.matrix(word_list)
+            return np.expand_dims(np.array(word_list), axis=2)
 
+def one_hot(num, classes):
+    label_list = [0]*classes
+    label_list[num] = 1
+    return label_list
 
 def batch_iter(data, batch_size, num_epochs, shuffle=True):
     """
@@ -73,6 +77,7 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
         # Shuffle the data at each epoch
         if shuffle:
             shuffle_indices = np.random.permutation(np.arange(data_size))
+            print(shuffle_indices)
             shuffled_data = data[shuffle_indices]
         else:
             shuffled_data = data

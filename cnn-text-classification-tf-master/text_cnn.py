@@ -40,9 +40,10 @@ class TextCNN(object):
                     name="pool")
                 pooled_outputs.append(pooled)
 
+        print(pooled_outputs[0])
         # Combine all the pooled features
         num_filters_total = num_filters * len(filter_sizes)
-        self.h_pool = tf.concat(pooled_outputs, 3)
+        self.h_pool = tf.concat(pooled_outputs,3)
         self.h_pool_flat = tf.reshape(self.h_pool, [-1, num_filters_total])
         
         # Add dropout

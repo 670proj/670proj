@@ -7,7 +7,7 @@ import time
 import datetime
 import data_helpers
 from text_cnn import TextCNN
-from tensorflow.contrib import learn
+#from tensorflow.contrib import learn
 import pickle
 import csv
 
@@ -58,13 +58,30 @@ with open(file_name, 'rb') as f:
     x.append(pickle.load(f))"""
 
 filename = "songcleaned.csv"
-x = data_helpers.pad_matrix(0)
+x=[]
+x.append(data_helpers.pad_matrix(0))
+x.append(data_helpers.pad_matrix(1))
+x.append(data_helpers.pad_matrix(2))
+x.append(data_helpers.pad_matrix(3))
+x.append(data_helpers.pad_matrix(4))
+x.append(data_helpers.pad_matrix(5))
+x.append(data_helpers.pad_matrix(6))
+
 y = []
+category = {'rock': 0, 'pop': 1, 'classic rock': 2, 
+            'country': 3, 'hard rock': 4, 'jazz': 5,
+            'folk': 6, '80s': 7, 'heavy metal': 8}
+count = 0
 with open(filename) as f:
     f_csv = csv.reader(f)
+    headers = next(f_csv)
     for row in f_csv:
-        y.append(row[3])
-y = np.matrix(y)
+        if count <=6:
+            y.append(data_helpers.one_hot(category[row[3]], len(category)))
+            count += 1
+        else:
+            break
+
 
 # Build vocabulary
 #max_document_length = max([len(x.split(" ")) for x in x_text])
@@ -81,6 +98,8 @@ y_shuffled = y
 # Split train/test set
 # TODO: This is very crude, should use cross-validation
 dev_sample_index = -1 * int(FLAGS.dev_sample_percentage * float(len(y)))
+print(dev_sample_index)
+dev_sample_index = 3
 x_train, x_dev = x_shuffled[:dev_sample_index], x_shuffled[dev_sample_index:]
 y_train, y_dev = y_shuffled[:dev_sample_index], y_shuffled[dev_sample_index:]
 
@@ -154,7 +173,7 @@ with tf.Graph().as_default():
         saver = tf.train.Saver(tf.global_variables(), max_to_keep=FLAGS.num_checkpoints)
 
         # Write vocabulary
-        vocab_processor.save(os.path.join(out_dir, "vocab"))
+        #vocab_processor.save(os.path.join(out_dir, "vocab"))
 
         # Initialize all variables
         sess.run(tf.global_variables_initializer())
