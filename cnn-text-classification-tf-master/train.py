@@ -10,6 +10,7 @@ from text_cnn import TextCNN
 #from tensorflow.contrib import learn
 import pickle
 import csv
+import random
 
 
 # Parameters
@@ -57,30 +58,32 @@ x = []
 with open(file_name, 'rb') as f:
     x.append(pickle.load(f))"""
 
-filename = "songcleaned.csv"
-x=[]
-x.append(data_helpers.pad_matrix(0))
-x.append(data_helpers.pad_matrix(1))
-x.append(data_helpers.pad_matrix(2))
-x.append(data_helpers.pad_matrix(3))
-x.append(data_helpers.pad_matrix(4))
-x.append(data_helpers.pad_matrix(5))
-x.append(data_helpers.pad_matrix(6))
+filename = "data/songcleaned.csv"
+filenameX = "data/matrix"
+# x=[]
+# x.append(data_helpers.pad_matrix(0))
+# x.append(data_helpers.pad_matrix(1))
+# x.append(data_helpers.pad_matrix(2))
+# x.append(data_helpers.pad_matrix(3))
+# x.append(data_helpers.pad_matrix(4))
+# x.append(data_helpers.pad_matrix(5))
+# x.append(data_helpers.pad_matrix(6))
 
-y = []
-category = {'rock': 0, 'pop': 1, 'classic rock': 2, 
-            'country': 3, 'hard rock': 4, 'jazz': 5,
-            'folk': 6, '80s': 7, 'heavy metal': 8}
-count = 0
-with open(filename) as f:
-    f_csv = csv.reader(f)
-    headers = next(f_csv)
-    for row in f_csv:
-        if count <=6:
-            y.append(data_helpers.one_hot(category[row[3]], len(category)))
-            count += 1
-        else:
-            break
+x = data_helpers.load_X(filenameX)
+y = data_helpers.load_Y(filename)
+# category = {'rock': 0, 'pop': 1, 'classic rock': 2, 
+#             'country': 3, 'hard rock': 4, 'jazz': 5,
+#             'folk': 6, '80s': 7, 'heavy metal': 8}
+# count = 0
+# with open(filename) as f:
+#     f_csv = csv.reader(f)
+#     headers = next(f_csv)
+#     for row in f_csv:
+#         if count <=6:
+#             y.append(data_helpers.one_hot(category[row[3]], len(category)))
+#             count += 1
+#         else:
+#             break
 
 
 # Build vocabulary
@@ -89,19 +92,24 @@ with open(filename) as f:
 #x = np.array(list(vocab_processor.fit_transform(x_text)))
 
 # Randomly shuffle data
-np.random.seed(10)
-shuffle_indices = np.random.permutation(np.arange(len(y)))
+temp_data = list(zip(x, y))
+random.shuffle(temp_data)
+x_shuffled, y_shuffled = zip(*temp_data)
+# np.random.seed(10)
+# shuffle_indices = np.random.permutation(np.arange(len(y)))
 #x_shuffled = x[shuffle_indices]
 #y_shuffled = y[shuffle_indices]
-x_shuffled = x
-y_shuffled = y
+# x_shuffled = x
+# y_shuffled = y
 # Split train/test set
 # TODO: This is very crude, should use cross-validation
 dev_sample_index = -1 * int(FLAGS.dev_sample_percentage * float(len(y)))
 print(dev_sample_index)
-dev_sample_index = 3
+# dev_sample_index = 3
 x_train, x_dev = x_shuffled[:dev_sample_index], x_shuffled[dev_sample_index:]
 y_train, y_dev = y_shuffled[:dev_sample_index], y_shuffled[dev_sample_index:]
+
+x_dev = [data_helpers.pad_matrix0(item) for item in x_dev]
 
 del x, y, x_shuffled, y_shuffled
 
@@ -212,7 +220,7 @@ with tf.Graph().as_default():
                 writer.add_summary(summaries, step)
 
         # Generate batches
-        batches = data_helpers.batch_iter(
+        batches = data_helpers.batch_iter_new(
             list(zip(x_train, y_train)), FLAGS.batch_size, FLAGS.num_epochs)
         # Training loop. For each batch...
         for batch in batches:
