@@ -17,7 +17,7 @@ import random
 # ==================================================
 
 # Data loading params
-tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
+tf.flags.DEFINE_float("dev_sample_percentage", .01, "Percentage of the training data to use for validation")
 tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the negative data.")
 
@@ -68,9 +68,9 @@ filenameX = "data/matrix"
 # x.append(data_helpers.pad_matrix(4))
 # x.append(data_helpers.pad_matrix(5))
 # x.append(data_helpers.pad_matrix(6))
-
-x = data_helpers.load_X(filenameX)
-y = data_helpers.load_Y(filename)
+triple = data_helpers.triple(filename)
+x = data_helpers.load_X(filenameX,triple)
+y = data_helpers.load_Y(filename,triple)
 # category = {'rock': 0, 'pop': 1, 'classic rock': 2, 
 #             'country': 3, 'hard rock': 4, 'jazz': 5,
 #             'folk': 6, '80s': 7, 'heavy metal': 8}

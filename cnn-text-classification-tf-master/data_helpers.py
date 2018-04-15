@@ -77,20 +77,23 @@ def pad_matrix0(file_path):
             word_list = word_list[0:500]
             return np.expand_dims(np.array(word_list), axis=2)
 
-def load_X(file_path, nums_file=21457):
+def load_X(file_path, triple,nums_file=21457):
     """
         save files into list first
     """
     files = []
     for i in range(nums_file):
         file_name = file_path +'/' + str(i) + ".txt"
-        files.append(file_name)
+        if triple[i]:
+            for k in range(3):
+                files.append(file_name)
+        else:
+            files.append(file_name)
+            
     return files
 
-def load_Y(file_path):
-    y = []
+def load_Y(file_path,triple):
     import pandas as pd
-    import numpy as np
     df = pd.read_csv(file_path)
     labels = list(df['cat'])
     cats   = list(set(labels))
@@ -99,8 +102,25 @@ def load_Y(file_path):
         index = cats.index(label)
         label = [0] * len(cats)
         label[index] = 1
-        res.append(label)
+        if triple[i]:
+            for k in range(3):
+                res.append(label)
+        else:
+            res.append(label)
     return res
+
+def triple(file_path):
+    y = []
+    triple_set = { 'country', '80s',  'classic rock', 'jazz', 'heavy metal', 'folk'}
+    import pandas as pd
+    df = pd.read_csv(file_path)
+    labels = list(df['cat'])
+    for i, label in enumerate(labels):
+        if label in triple_set:
+            y.append(1)
+        else:
+            y.append(0)
+    return y
 
 def one_hot(num, classes):
     label_list = [0]*classes
