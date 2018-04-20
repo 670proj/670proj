@@ -32,13 +32,17 @@ http://www.templatemo.com/tm-489-strategy
                             <!-- <form action="index.html" id="search-form"> -->
                                 <h2 class="text-uppercase">Music Mining</h2>
                                 <p class="m-b-mid">Find music genre by lyrics</p>
-                                <p>Example song name, {{example['song']}}, artist name: {{example['artist']}} </p>
-                                <div class="form-group">
-                                    <input name="song" type="text" class="form-control center-block tm-max-w-400" id="input1" placeholder="song name">
-                                    <input name="artist" type="text" class="form-control center-block tm-max-w-400" id="input2" placeholder="artist name">
-                                </div>                                
-                                <button class="cd-btn" id="search">Search</button>
-                                
+                                    <span id='disp1' style="color:white;">Song name: {{example['song']}}   </span><br>
+                                    <span id='disp2' style="color:white;">Artist name:  {{example['artist']}} </span>
+                                <div class="form-group" style=''>
+                                    <input name="song" type="text" class="form-control center-block tm-max-w-400" id="input1" placeholder="{{example['song']}}">
+                                    <input name="artist" type="text" class="form-control center-block tm-max-w-400" id="input2" placeholder="{{example['artist']}}">
+                                </div> 
+                                <span style="display: inline;">
+                                    <button class="cd-btn" id="random">Generate</button> 
+                                    <button class="cd-btn" id="search">Search</button>
+                                </span>                               
+                                    
                             <!-- </form>                             -->
                         </div>                        
                     </div> <!-- .cd-full-width -->
@@ -55,44 +59,60 @@ http://www.templatemo.com/tm-489-strategy
                 </nav> 
             </div> <!-- .cd-slider-nav -->
 
-            <div class = "container" id = 'lyric'>
-
-            </div>
 
         </section> <!-- .cd-hero -->
 
+        <div class="container-fluid tm-section tm-section-2">
 
+            <div class = "container" id = 'lyric' style='color:red'>
+                {{example['text']}}
+            </div>
 
+        </div>
 
         <div class="container-fluid tm-section tm-section-2">
             <div class="row tm-media-row">
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <img src="{{url_for('static', filename='img/tm-img-320x320-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
+
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                 <!--    <img src="{{url_for('static', filename='img/tm-img-320x320-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img"> -->
+                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:rekajo:playlist:27aaLzuw15IP6sk5fsoj7K" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
                 </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="tm-media-text-container">
+
+
+               
+
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+
+                    <iframe src="https://open.spotify.com/embed?uri=spotify:user:officialpetshopboys:playlist:7p8LX3UR1iG7xcbHoIey9l" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+ <!--                    <div class="tm-media-text-container">
                         <h3 class="tm-media-title tm-gray-text">Interdum et malesuada fames</h3>
                         <p class="tm-media-description tm-gray-text-2">Aliquam dapibus felis fringilla ligula mittis, ut congue purus gravida. Suspendisse suscipit tellus id odio mollis, id tincidunt metus gravida. Ut at arcu in elit maximus eleifend.</p>    
-                    </div>                    
+                    </div>   -->                  
                 </div>
+
+
+
             </div>
             
-            <div class="row tm-media-row tm-flex-container-reverse">
+<!--             <div class="row tm-media-row tm-flex-container-reverse">
                 
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tm-flex-child-2">
                     <img src="{{url_for('static', filename='img/tm-img-320x320-2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
                 </div>
 
                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 tm-flex-child-1">
+
                     <div class="tm-media-text-container-left">
                         <h3 class="tm-media-title tm-gray-text">Interdum et malesuada fames</h3>
                         <p class="tm-media-description tm-gray-text-2">Aliquam dapibus felis fringilla ligula mittis, ut congue purus gravida. Suspendisse suscipit tellus id odio mollis, id tincidunt metus gravida. Ut at arcu in elit maximus eleifend.</p>    
                     </div>                    
                 </div>
 
-            </div>
+            </div> -->
 
-            <div class="row tm-media-row">
+<!--             <div class="row tm-media-row">
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <img src="{{url_for('static', filename='img/tm-img-320x320-3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
                 </div>
@@ -102,7 +122,8 @@ http://www.templatemo.com/tm-489-strategy
                         <p class="tm-media-description tm-gray-text-2">Aliquam dapibus felis fringilla ligula mittis, ut congue purus gravida. Suspendisse suscipit tellus id odio mollis, id tincidunt metus gravida. Ut at arcu in elit maximus eleifend.</p>    
                     </div>                    
                 </div>
-            </div>
+            </div> -->
+
 
         </div>
 
@@ -230,7 +251,7 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item active">
                                     <div class="carousel-content">
                                         <div>         
-                                            <img src="{{url_for('static', filename='img/tm-img-270x270-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
+                                            <img src="{{url_for('static', filename='img/tm-img-320x320-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
                                             <p class="text-xs-center tm-carousel-item-text">Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat leo vestibulum vestibulum.</p>
                                         </div>
                                     </div>                               
@@ -239,7 +260,7 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item">
                                     <div class="carousel-content">
                                         <div>
-                                            <img src="{{ url_for('static', filename='img/tm-img-270x270-2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
+                                            <img src="{{ url_for('static', filename='img/tm-img-320x320-2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
                                             <p class="text-xs-center tm-carousel-item-text">Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Donec consequat leo vestibulum vestibulum venenatis.</p>
                                         </div>
                                     </div>                                
@@ -248,7 +269,7 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item">
                                     <div class="carousel-content">
                                         <div>
-                                            <img src="{{ url_for('static', filename='img/tm-img-270x270-3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
+                                            <img src="{{ url_for('static', filename='img/tm-img-320x320-3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
                                             <p class="text-xs-center tm-carousel-item-text">Donec consequat leo vestibulum vestibulum venenatis. Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </div>                                
@@ -311,9 +332,9 @@ http://www.templatemo.com/tm-489-strategy
                 </div> -->
                 <div class="row">
                     <footer class="col-xs-12 text-xs-center">
-                        <p class="tm-text-white tm-copyright-text">Copyright &copy; 2016 Your Company 
-                        
-                        | Designed by <a rel="nofollow" href="http://www.google.com/+templatemo" target="_parent">Templatemo</a></p>
+                        <p class="tm-text-white tm-copyright-text">Copyright &copy; 2018 Texas A&M University CS670 course
+
+                        | Designed by <a rel="nofollow" href="http://www.google.com/+templatemo" target="_parent"> CS course</a></p>
                     </footer>
                 </div>
             </div>
@@ -370,8 +391,28 @@ http://www.templatemo.com/tm-489-strategy
                      }
                 });   
 
+                $('#random').click(function() {
+
+                        var queryString = '/random'
+                        console.log(queryString)
+                        $.get(queryString, {}, function(result){
+
+                            console.log(result)
+                            result = JSON.parse(result)
+                            $('#input1:input').attr('placeholder', result['song'])
+                            $('#input2:input').attr('placeholder', result['artist'])
+                            $('#input1:input').attr('value', result['song']);
+                            $('#input2:input').attr('value', result['artist']);
+                            $('#disp1').html('Song name: ' + result['song']) 
+                            $('#disp2').html('Artist name: ' + result['artist']) 
+                            // $('#input1:input').removeAttr('value');
+                            // $('#input2:input').removeAttr('value');
+                        });
+
+                });
 
                 $('#search').click(function() {
+
                     var queryString = '/search/' + $('#input1:input').val() + '/' + $('#input2:input').val()
                     console.log(queryString);
 
