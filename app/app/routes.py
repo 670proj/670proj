@@ -1,9 +1,10 @@
 from app import app
 from flask import render_template, flash, redirect, url_for
-from bson.json_util import dumps
 from app.model.forms import SearchForm
-from app import mongo
+# from app import mongo
+import pandas as pd
 
+df = pd.read_csv("songcleaned.csv");
 
 @app.route('/')
 @app.route('/index')
@@ -13,13 +14,9 @@ def index():
 
 @app.route('/search/<song>/<artist>', methods=['GET'])
 def search(song, artist):
-	# {"song":song, "artist":artist}
-	items = mongo.songcat.find({'song':song, 'artist':artist})
-	# df.
-	data = dumps(items)
-	print(data)
-	print(type(data))
-	return data
+	
+	data = df.loc[(df['song']==song) & (df['artist']==artist)]
+	return data.to_json(orient='records')
 
 
 
