@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
 		uploadVideo(slidesWrapper);
 
 		//autoplay slider
-		setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
+		// setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
 
 		//on mobile - open/close primary navigation clicking/tapping the menu icon
 		primaryNav.on('click', function(event){
@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
 				updateSliderNavigation(sliderNav, selectedPosition);
 				updateNavigationMarker(navigationMarker, selectedPosition+1);
 				//reset autoplay
-				setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
+				// setAutoplay(slidesWrapper, slidesNumber, autoPlayDelay);
 			}
 		});
 	}

@@ -16,10 +16,35 @@ http://www.templatemo.com/tm-489-strategy
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">                                
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hero-slider-style.css') }}">                       
     <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-style.css') }}">  
+    <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <style>
+    input {
+        padding: 12px 20px;
+        margin: 10px ;
+        width: 30px;
+    } 
+ </style>
 
 </head>
 
-    <body>
+<body>
+
+<!-- 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Project</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="index" >Home</a></li>
+              <li><a href="model">Model</a></li>
+              <li><a href="artistlist">ArtistList</a></li>
+            </ul>
+        </div>
+    </nav> -->
+
+
         <section class="cd-hero">
             <ul class="cd-hero-slider autoplay">  
             <!-- 
@@ -29,21 +54,59 @@ http://www.templatemo.com/tm-489-strategy
                 <li class="selected">
                     <div class="cd-full-width">
                         <div class="tm-slide-content-div">
-                            <!-- <form action="index.html" id="search-form"> -->
                                 <h2 class="text-uppercase">Music Mining</h2>
                                 <p class="m-b-mid">Find music genre by lyrics</p>
-                                    <span id='disp1' style="color:white;">Song name: {{example['song']}}   </span><br>
-                                    <span id='disp2' style="color:white;">Artist name:  {{example['artist']}} </span>
+<!--                                     <span id='disp1' style="color:white;">Song name: {{example['song']}}   </span><br>
+                                    <span id='disp2' style="color:white;">Artist name:  {{example['artist']}} </span> -->
                                 <div class="form-group" style=''>
-                                    <input name="song" type="text" class="form-control center-block tm-max-w-400" id="input1" placeholder="{{example['song']}}">
-                                    <input name="artist" type="text" class="form-control center-block tm-max-w-400" id="input2" placeholder="{{example['artist']}}">
+                                    <input name="song" type="text" class="form-control " id="input1" placeholder="{{example['song']}}">
+                                    <input name="artist" type="text" class="form-control " id="input2" placeholder="{{example['artist']}}">
                                 </div> 
                                 <span style="display: inline;">
-                                    <button class="cd-btn" id="random">Generate</button> 
+                                    <button class="cd-btn" id="random">Random</button> 
                                     <button class="cd-btn" id="search">Search</button>
-                                </span>                               
-                                    
-                            <!-- </form>                             -->
+                                </span>                                 
+                            </div>                            
+                        </div>                        
+                    </div> <!-- .cd-full-width -->
+                </li>   
+
+
+
+<!--                  <li class="selected">
+                    <div class="cd-full-width">
+                        <div class="tm-slide-content-div">
+                                <h2 class="text-uppercase">Music Mining</h2>
+                                <p class="m-b-mid">Find music genre by lyrics</p>
+                                <div class="form-group" style=''>
+                                    <input name="song" type="text" class="form-control " id="input1" value = "{{example['song']}}" placeholder="{{example['song']}}">
+                                    <input name="artist" type="text" class="form-control " id="input2" value ="{{example['artist']}}" placeholder="{{example['artist']}}">
+                                </div> 
+                                <span style="display: inline;">
+                                     <button class="cd-btn" id="search2">Search</button>
+                                </span>                                 
+                            </div>                            
+                        </div>                        
+                    </div> 
+                </li>   
+ -->
+
+                <li class="selected">
+                    <div class="cd-full-width">
+                        <div class="tm-slide-content-div">
+                                <h2 class="text-uppercase">Music Mining</h2>
+                                <p class="m-b-mid">Find music genre by lyrics</p>
+
+                                 <div id = 'displayartilist' style='margin-right:auto; margin-left: auto;' >
+
+
+
+                                 </div>   
+
+                                <span style="display: inline;">
+                                     <button class="cd-btn" id="artist">Artist</button>
+                                </span>                                 
+                            </div>                            
                         </div>                        
                     </div> <!-- .cd-full-width -->
                 </li>   
@@ -54,7 +117,11 @@ http://www.templatemo.com/tm-489-strategy
             <div class="cd-slider-nav">
                 <nav>
                     <span class="cd-marker item-1"></span>
-                    
+                    <ul>
+                        <li class="selected"><a href="#0"></a> </li>
+                        <li> <a href="#0"></a></li>
+                        <li> <a href="#0"></a></li>
+                    </ul>
                     
                 </nav> 
             </div> <!-- .cd-slider-nav -->
@@ -64,7 +131,7 @@ http://www.templatemo.com/tm-489-strategy
 
         <div class="container-fluid tm-section tm-section-2">
 
-            <div class = "container" id = 'lyric' style='color:red'>
+            <div class="jumbotron" id = 'lyric'>
                 {{example['text']}}
             </div>
 
@@ -411,36 +478,71 @@ http://www.templatemo.com/tm-489-strategy
 
                 });
 
+                $('#artist').click(function() {
+
+                         var queryString = '/artist'
+
+                          $.get(queryString, {}, function(result){
+
+                                console.log(result);
+
+                            var content = "<div style='width:300px; height:300px; color:white; overflow:auto;'>" + result + "</div>"
+
+                            $('#displayartilist').html(content);
+
+                          });
+
+                });
+
+
+    
+    var content= "<div class='row tm-media-row'> <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'>"
+    var content2= "<div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>"
+    var closed = "</div>"
+    var runclassificaiton = "<div class='row tm-media-row'> <div class='col-xs-4 col-sm-6 col-md-4 col-lg-4'><button class='btn btn-success' id='runclassificaiton'>Classificaiton</button></div><div class='col-xs-4 col-sm-4 col-md-4 col-lg-4' id ='classificationRes' style='color:red'>Pop</div></div>";
+    var buttonClass = $('#runclassificaiton');
+    console.log(buttonClass)
                 $('#search').click(function() {
 
-                    var queryString = '/search/' + $('#input1:input').val() + '/' + $('#input2:input').val()
+                    var queryString = '/search/' + $('#input1:input').val() + '/' + $('#input2:input').val();
                     console.log(queryString);
 
                     $.get(queryString, {}, function(result){
 
                         if (result && result.length!=0) {
 
-                            var content = "<div class='container' style='color:red'>";
+                            // var content = "<div class='container' style='color:red'>";
 
                             result = JSON.parse(result)
 
                             for (var i = 0; i < result.length; i++) {
-                                content += result[i]['text']
+                                row1 = content + "<p>Song Name</p>" + closed + content2 + result[i]['song'] + closed + closed 
+                                row2 = content + "<p>Artist Name</p>" + closed + content2 + result[i]['artist'] + closed + closed 
+                                row3 = content + "<p>Lyric</p>" + closed + content2 + result[i]['text'] + closed + closed 
+                                row4 = content + "<p>Category</p>" + closed + content2 + result[i]['cat'] + closed + closed
                             }
 
                             $('#lyric').html(
 
-                                content + "</div>"
-
+                                row1 + row2 + row3 +row4 + runclassificaiton
                             );
-                            console.log(typeof result);
+                            buttonClass = $('#runclassificaiton');
+                            console.log(buttonClass)
                         }
 
                     });
 
                 });           
-            });
+        
+        buttonClass.click(function() {
 
+            console.log('clicked')
+        //                                     // $('#classificationRes').html('You have to call the backend CNN model')
+
+        });
+
+
+        });
         </script>             
 
 </body>

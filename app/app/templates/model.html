@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Music Mining</title>
+<!--
+Strategy Template
+http://www.templatemo.com/tm-489-strategy
+-->
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.5.0/css/font-awesome.min.css') }}">        
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">                                
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hero-slider-style.css') }}">                       
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-style.css') }}">  
+    <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Project</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="index" >Home</a></li>
+              <li><a href="model">Model</a></li>
+              <li><a href="artistlist">ArtistList</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+ <section class="cd-hero">
+            <ul class="cd-hero-slider autoplay">  
+            <!-- 
+                <ul class="cd-hero-slider autoplay"> for slider auto play 
+                <ul class="cd-hero-slider"> for disabled auto play
+            -->
+                <li class="selected">
+                    <div class="cd-full-width">
+<!--                         <div class="tm-slide-content-div">
+                           
+                        </div>  -->                       
+                    </div> 
+                </li>   
+
+                
+            </ul> <!-- .cd-hero-slider -->
+
+            <div class="cd-slider-nav">
+                <nav>
+                    <span class="cd-marker item-1"></span>
+                    
+                    
+                </nav> 
+            </div> <!-- .cd-slider-nav -->
+
+
+        </section> <!-- .cd-hero -->
+
+
+
+    <div class="container-fluid tm-section tm-section-2">
+
+        <div class="jumbotron">
+             <h1>Introduction</h1>
+              Anytime you feel Like you just can't hold on Just hold on to my love I'll help you be strong But you're so afraid to lose And baby I can't reach your heart I can't face this world it's keeping us apart And I could be the one to show you Everything you missed before Just hold on now 'Cause I could be the one to give you more [Chorus] Anytime you need a love baby I'm on your side Just let me be the one that can make it all right Anytime you need a love baby you're in my heart I could make it all right I look into your eyes And I feel it coming through I can't help but want you more than I want to So baby take our love your way Cast them all on me That's all I ever wanted was just to make you see But I could be the one to heal you All that you've been searching for Just hold on to my love And baby let me give you more [Chorus] Now there's no way out And I can't help the way I feel 'Cause baby I'm on fire And I'll be waiting right here You know our love isn't real [Chorus]
+
+         </div>
+
+    </div>
+
+
+
+
+
+        <!-- Footer section -->
+        <section class="tm-bg-purple tm-section">
+            <div class="container-fluid tm-section-5-inner">
+                <div class="row">
+                    <footer class="col-xs-12 text-xs-center">
+                        <p class="tm-text-white tm-copyright-text">Copyright &copy; 2018 Texas A&M University CS670 course
+
+                        | Designed by <a rel="nofollow" href="http://www.google.com/+templatemo" target="_parent"> CS course</a></p>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- load JS files -->
+        <script src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>             <!-- jQuery (https://jquery.com/download/) -->
+        <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> <!-- Tether for Bootstrap (http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h) --> 
+        <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>                 <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
+        <script src="{{url_for('static', filename='js/hero-slider-script.js')}}"></script>            <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
+        <script src="{{url_for('static', filename='js/jquery.touchSwipe.min.js')}}"></script>         <!-- http://labs.rampinteractive.co.uk/touchSwipe/demos/ -->
+        <script> 
+        </script>
+</body>
+
+</html>

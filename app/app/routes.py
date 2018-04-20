@@ -16,6 +16,12 @@ def index():
 	# example = {'song': "Yesterday, When I Was Mad", "artist": "Pet Shop Boys"}
 	return render_template('index.html', example=data)
 
+# @app.route('/artistlist')
+# def artistlist():
+# 	# example = {'song': "Yesterday, When I Was Mad", "artist": "Pet Shop Boys"}
+# 	return render_template('artistlist.html')
+
+
 @app.route('/search/<song>/<artist>', methods=['GET'])
 def search(song, artist):
 	data = df.loc[(df['song']==song.strip()) & (df['artist']==artist.strip())]
@@ -25,6 +31,13 @@ def search(song, artist):
 	# print(data)
 	return data
 
+@app.route('/artist')
+def getArtilist():
+	artilist = set(list(df['artist']))
+	# for art in artilist:
+	# 	print(art)
+
+	return '#'.join(artilist)
 
 @app.route('/random', methods=['GET'])
 def generateRandom():
@@ -33,3 +46,16 @@ def generateRandom():
 	# data = json.loads(data)
 	# print(data)
 	return data
+
+@app.route('/runCNN/<song>/<artist>', methods=['GET'])
+def runCNN(song, artist):
+	data = df.loc[(df['song']==song.strip()) & (df['artist']==artist.strip())]
+	lyric = data['text']
+
+	# To runn CNN model and return the probability
+	return None
+
+@app.route('/model', methods=['GET'])
+def modelPage():
+	#Todo, have to write a page to introduce our model
+	return render_template('model.html')
