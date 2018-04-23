@@ -1,0 +1,27 @@
+/*
+
+Strategy Template
+
+http://www.templatemo.com/tm-489-strategy
+
+*/
+
+ul { padding: 0; margin: 0;}
+.cd-hero-slider li { 
+	list-style: none; 
+    background-color: #2c343b;
+
+}
+html { font-size: 100%; }
+body {
+	background-image: url('../img/cassette_2.png');
+    background-color: #FFFF;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 19px;
+	font-weight: 300;
+	overflow-x: hidden;
+}
+
+
+
+

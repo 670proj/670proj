@@ -1,3 +1,0 @@
-model_checkpoint_path: "/home/tony/Desktop/CNN/670proj/cnn-text-classification-tf-master/runs/1523753864/checkpoints/model-200"
-all_model_checkpoint_paths: "/home/tony/Desktop/CNN/670proj/cnn-text-classification-tf-master/runs/1523753864/checkpoints/model-100"
-all_model_checkpoint_paths: "/home/tony/Desktop/CNN/670proj/cnn-text-classification-tf-master/runs/1523753864/checkpoints/model-200"

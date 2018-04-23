@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Music Mining</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png')}}">
+
 <!--
 Strategy Template
 http://www.templatemo.com/tm-489-strategy
@@ -58,14 +60,16 @@ http://www.templatemo.com/tm-489-strategy
                                 <p class="m-b-mid">Find music genre by lyrics</p>
 <!--                                     <span id='disp1' style="color:white;">Song name: {{example['song']}}   </span><br>
                                     <span id='disp2' style="color:white;">Artist name:  {{example['artist']}} </span> -->
+                                <form action="result" id="search-form" method='get'>
                                 <div class="form-group" style=''>
-                                    <input name="song" type="text" class="form-control " id="input1" placeholder="{{example['song']}}">
-                                    <input name="artist" type="text" class="form-control " id="input2" placeholder="{{example['artist']}}">
+                                    <input name="song" type="text" class="form-control " value = "{{example['song']}}" id="input1" placeholder="{{example['song']}}">
+                                    <input name="artist" type="text" class="form-control " value = "{{example['artist']}}" id="input2" placeholder="{{example['artist']}}">
                                 </div> 
                                 <span style="display: inline;">
                                     <button class="cd-btn" id="random">Random</button> 
                                     <button class="cd-btn" id="search">Search</button>
-                                </span>                                 
+                                </span>
+                                </form>                                 
                             </div>                            
                         </div>                        
                     </div> <!-- .cd-full-width -->
@@ -95,7 +99,7 @@ http://www.templatemo.com/tm-489-strategy
                     <div class="cd-full-width">
                         <div class="tm-slide-content-div">
                                 <h2 class="text-uppercase">Music Mining</h2>
-                                <p class="m-b-mid">Find music genre by lyrics</p>
+                                <p class="m-b-mid">Find music genre by lyrics, click to see our model.</p>
 
                                  <div id = 'displayartilist' style='margin-right:auto; margin-left: auto;' >
 
@@ -104,7 +108,7 @@ http://www.templatemo.com/tm-489-strategy
                                  </div>   
 
                                 <span style="display: inline;">
-                                     <button class="cd-btn" id="artist">Artist</button>
+                                     <button class="cd-btn" id="artist">Model</button>
                                 </span>                                 
                             </div>                            
                         </div>                        
@@ -120,12 +124,10 @@ http://www.templatemo.com/tm-489-strategy
                     <ul>
                         <li class="selected"><a href="#0"></a> </li>
                         <li> <a href="#0"></a></li>
-                        <li> <a href="#0"></a></li>
                     </ul>
                     
                 </nav> 
             </div> <!-- .cd-slider-nav -->
-
 
         </section> <!-- .cd-hero -->
 
@@ -135,23 +137,20 @@ http://www.templatemo.com/tm-489-strategy
                 {{example['text']}}
             </div>
 
-        </div>
-
-        <div class="container-fluid tm-section tm-section-2">
+        <!-- </div> -->
+        <!-- <div class="container-fluid tm-section tm-section-2"> -->
             <div class="row tm-media-row">
 
                 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                  <!--    <img src="{{url_for('static', filename='img/tm-img-320x320-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img"> -->
-                 <iframe src="https://open.spotify.com/embed?uri=spotify:user:rekajo:playlist:27aaLzuw15IP6sk5fsoj7K" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe src="https://open.spotify.com/embed?uri=spotify:album:0n9SWDBEftKwq09B01Pwzw" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
                 </div>
 
-
                
-
                 <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
 
-                    <iframe src="https://open.spotify.com/embed?uri=spotify:user:officialpetshopboys:playlist:7p8LX3UR1iG7xcbHoIey9l" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe src="https://open.spotify.com/embed?uri=spotify:album:0jTGHV5xqHPvEcwL8f6YU5" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
  <!--                    <div class="tm-media-text-container">
                         <h3 class="tm-media-title tm-gray-text">Interdum et malesuada fames</h3>
@@ -159,144 +158,20 @@ http://www.templatemo.com/tm-489-strategy
                     </div>   -->                  
                 </div>
 
-
-
             </div>
             
-<!--             <div class="row tm-media-row tm-flex-container-reverse">
-                
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 tm-flex-child-2">
-                    <img src="{{url_for('static', filename='img/tm-img-320x320-2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
-                </div>
-
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 tm-flex-child-1">
-
-                    <div class="tm-media-text-container-left">
-                        <h3 class="tm-media-title tm-gray-text">Interdum et malesuada fames</h3>
-                        <p class="tm-media-description tm-gray-text-2">Aliquam dapibus felis fringilla ligula mittis, ut congue purus gravida. Suspendisse suscipit tellus id odio mollis, id tincidunt metus gravida. Ut at arcu in elit maximus eleifend.</p>    
-                    </div>                    
-                </div>
-
-            </div> -->
-
-<!--             <div class="row tm-media-row">
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <img src="{{url_for('static', filename='img/tm-img-320x320-3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <div class="tm-media-text-container">
-                        <h3 class="tm-media-title tm-gray-text">Interdum et malesuada fames</h3>
-                        <p class="tm-media-description tm-gray-text-2">Aliquam dapibus felis fringilla ligula mittis, ut congue purus gravida. Suspendisse suscipit tellus id odio mollis, id tincidunt metus gravida. Ut at arcu in elit maximus eleifend.</p>    
-                    </div>                    
-                </div>
-            </div> -->
-
-
         </div>
 
-
-<!--         <section class="tm-section tm-section-3 tm-bg-purple">
-            <div class="container-fluid tm-section-3-inner">
-                <div class="row center-block text-xs-center tm-section-3-header">
-                    <div class="col-xs-12">
-                        <h2 class="tm-text-white tm-section-3-title">Choose your plan</h2>
-                        <p class="tm-text-white tm-section-3-description">Curabitur porta scelerisque justo, ut ultrices lacus auctor eget. Proin volutpat eu mi nec consequat. Integer porta tristique quam.</p>      
-                    </div>
-                </div>
-                <div class="row">                    
-                    
-                    <div class="tm-plan-boxes-container">
-                        
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-table-col">
-                                
-                            <table class="tm-plan">
-                                <thead>
-                                    <tr>
-                                        <th class="text-xs-center tm-plan-table-header">Silver Plan</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tm-bg-light-purple">
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">Sed porttitor lobortis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">10 sit amet luctus sapien</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">15 eget sagittis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">20 aliquam eros nec tortor</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">30 vel suscipit turpis</td></tr>                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td class="text-xs-center">
-                                            <a href="#" class="tm-plan-link tm-plan-link-purple">Sign up</a>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>  
-
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-table-col">
-                            
-                            <table class="tm-plan">
-                                <thead>
-                                    <tr>
-                                        <th class="text-xs-center tm-plan-table-header">Titanium Plan</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tm-bg-light-green">
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">Sed porttitor lobortis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">20 sit amet luctus sapien</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">25 eget sagittis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">35 aliquam eros nec tortor</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">45 vel suscipit turpis</td></tr>                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td class="text-xs-center">
-                                            <a href="#" class="tm-plan-link tm-plan-link-green">Sign up</a>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table> 
-
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-table-col">
-
-                            <table class="tm-plan">
-                                <thead>
-                                    <tr>
-                                        <th class="text-xs-center tm-plan-table-header">Platinum Plan</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tm-bg-light-orange">
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">Sed porttitor lobortis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">30 sit amet luctus sapien</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">40 eget sagittis</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">50 aliquam eros nec tortor</td></tr>
-                                    <tr class="tm-plan-table-row"><td class="tm-plan-table-cell">60 vel suscipit turpis</td></tr>                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td class="text-xs-center">
-                                            <a href="#" class="tm-plan-link tm-plan-link-orange">Sign up</a>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table> 
-
-                        </div>
-
-                    </div> 
-            
-                </div>
-            </div>            
-        </section> -->
 
         <section class="center-block tm-section tm-section-4">
             <div class="container-fluid tm-section-3-inner">
                 <div class="row center-block text-xs-center tm-section-3-header">
+
+
                     <div class="col-xs-12">
-                        <h2 class="tm-section-3-title">Testimonials</h2>
-                        <p class="tm-section-3-description">Curabitur porta scelerisque justo, ut ultrices lacus auctor eget. Proin volutpat eu mi nec consequat. Integer porta tristique quam.</p>      
+                        <!--<h2 class="tm-section-3-title">Classification</h2>-->
+                        <p style="text-align:center;"><img src="{{url_for('static', filename='img/log_tag.png')}}"></p>
+                        <p class="tm-section-3-description">Try to search songs you like here, it will give you the result classified by cnn.</p>      
                     </div>
                 </div>
                 <div class="row">
@@ -318,8 +193,8 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item active">
                                     <div class="carousel-content">
                                         <div>         
-                                            <img src="{{url_for('static', filename='img/tm-img-320x320-1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
-                                            <p class="text-xs-center tm-carousel-item-text">Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat leo vestibulum vestibulum.</p>
+                                            <p style="text-align:center;"><img src="{{url_for('static', filename='img/music1.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img"></p>
+                                            <p class="text-xs-center tm-carousel-item-text">"Fashion of His Love" is a song by Lady Gaga on the first disc of the special edition of her third album, Born This Way. The song title was revealed by Gaga when she released the tracklisting of the special edition of the album. The song was registered on her BMI on May 17, 2011, and premiered on GagaVille on May 19.</p>
                                         </div>
                                     </div>                               
                                 </div>
@@ -327,8 +202,8 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item">
                                     <div class="carousel-content">
                                         <div>
-                                            <img src="{{ url_for('static', filename='img/tm-img-320x320-2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
-                                            <p class="text-xs-center tm-carousel-item-text">Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Donec consequat leo vestibulum vestibulum venenatis.</p>
+                                            <p style="text-align:center;"><img src="{{ url_for('static', filename='img/music2.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img"></p>
+                                            <p class="text-xs-center tm-carousel-item-text">"Why Wait" is a song written by Neil Thrasher, Tom Shapiro, and Jimmy Yeary and recorded by American country music band Rascal Flatts. It was released in August 2010 as the first single from their seventh studio album Nothing Like This, released on November 16, 2010. It is also their first single released by Big Machine Records.</p>
                                         </div>
                                     </div>                                
                                 </div>
@@ -336,8 +211,8 @@ http://www.templatemo.com/tm-489-strategy
                                 <div class="carousel-item">
                                     <div class="carousel-content">
                                         <div>
-                                            <img src="{{ url_for('static', filename='img/tm-img-320x320-3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img">
-                                            <p class="text-xs-center tm-carousel-item-text">Donec consequat leo vestibulum vestibulum venenatis. Quisque quis ex sed lorem consectetur aliquet vitae in lorem. Vivamus non commodo sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            <p style="text-align:center;"><img src="{{ url_for('static', filename='img/music3.jpg')}}" alt="Image" class="img-fluid img-circle img-thumbnail tm-media-img"></p>
+                                            <p class="text-xs-center tm-carousel-item-text">Michael Whitaker Smith (born October 7, 1957) is an American musician, who has charted in both contemporary Christian and mainstream charts. His biggest success in mainstream music was in 1991 when "Place in this World" hit No. 6 on the Billboard Hot 100. Over the course of his career, he has sold more than 18 million albums.</p>
                                         </div>
                                     </div>                                
                                 </div>
@@ -353,50 +228,8 @@ http://www.templatemo.com/tm-489-strategy
         <!-- Contact section -->
         <section class="tm-bg-purple tm-section">
             <div class="container-fluid tm-section-5-inner">
-<!--                 <div class="row">
-                    <div class="col-xs-12 tm-text-white text-xs-center">
-                        <h2 class="tm-section-3-title">Contact Us</h2>
-                        <p class="tm-section-3-description">Curabitur porta scelerisque justo, ut ultrices lacus auctor eget. Proin volutpat eu mi nec consequat. Integer porta tristique quam.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <form action="index.html" method="post" class="tm-contact-form">
-                        
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email" required/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject" required/>
-                            </div>    
-                        </div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div class="form-group">
-                                <textarea id="contact_message" name="contact_message" class="form-control" rows="6" placeholder="Your message" required></textarea>
-                            </div>    
-                        </div>
 
-                        <div class="col-xs-12">
-                            <button type="submit" class="cd-btn pull-xs-right">Send it</button>                              
-                        </div>
-                    </form>  
-                </div> -->
-
-<!--                 <div class="row">
-                    <div class="col-xs-12 text-xs-center">
-                        <div class="tm-social-icons-container">
-                            <a href="#" class="tm-social-icon-link"><i class="fa fa-facebook tm-social-icon"></i></a>
-                            <a href="#" class="tm-social-icon-link"><i class="fa fa-google-plus tm-social-icon"></i></a>
-                            <a href="#" class="tm-social-icon-link"><i class="fa fa-twitter tm-social-icon"></i></a>
-                            <a href="#" class="tm-social-icon-link"><i class="fa fa-behance tm-social-icon"></i></a>
-                            <a href="#" class="tm-social-icon-link"><i class="fa fa-linkedin tm-social-icon"></i></a>
-                        </div>
-                    </div>                    
-                </div> -->
                 <div class="row">
                     <footer class="col-xs-12 text-xs-center">
                         <p class="tm-text-white tm-copyright-text">Copyright &copy; 2018 Texas A&M University CS670 course
@@ -458,39 +291,53 @@ http://www.templatemo.com/tm-489-strategy
                      }
                 });   
 
-                $('#random').click(function() {
-
+                $('#random').on("click", function(e) {
+                        e.preventDefault();
+                        document.getElementById("input1").value=''
+                        document.getElementById("input2").value=''
                         var queryString = '/random'
                         console.log(queryString)
                         $.get(queryString, {}, function(result){
 
+
+                            // $("#input1").on("focus", function() {
+                            //         $("#input1").val("");
+                            //     });
+                            // $("#input2").on("focus", function() {
+                            //         $("#input2").val("");
+                            // });
+
                             console.log(result)
                             result = JSON.parse(result)
-                            $('#input1:input').attr('placeholder', result['song'])
-                            $('#input2:input').attr('placeholder', result['artist'])
-                            $('#input1:input').attr('value', result['song']);
-                            $('#input2:input').attr('value', result['artist']);
-                            $('#disp1').html('Song name: ' + result['song']) 
-                            $('#disp2').html('Artist name: ' + result['artist']) 
                             // $('#input1:input').removeAttr('value');
                             // $('#input2:input').removeAttr('value');
+                            $('#input1:input').attr('placeholder', result['song'])
+                            $('#input2:input').attr('placeholder', result['artist'])
+                            document.getElementById("input1").value=result['song']
+                            document.getElementById("input2").value=result['artist']
+
+                            $("#lyric").html(result['text']);
+                            //$('#input1:input').attr('value', result['song']);
+                            //$('#input2:input').attr('value', result['artist']);
+                            // $('#disp1').html('Song name: ' + result['song']) 
+                            // $('#disp2').html('Artist name: ' + result['artist']) 
                         });
 
                 });
 
                 $('#artist').click(function() {
 
-                         var queryString = '/artist'
+                         // var queryString = '/model'
+                        location.href= '/model'
+                          //$.get(queryString, {}, function(result){
 
-                          $.get(queryString, {}, function(result){
+                          //      console.log(result);
 
-                                console.log(result);
+                            //var content = "<div style='height:300px; color:white; overflow:auto;'>" + result + "</div>"
 
-                            var content = "<div style='width:300px; height:300px; color:white; overflow:auto;'>" + result + "</div>"
+                          //  $('#displayartilist').html(content);
 
-                            $('#displayartilist').html(content);
-
-                          });
+                          //});
 
                 });
 
@@ -504,7 +351,9 @@ http://www.templatemo.com/tm-489-strategy
     console.log(buttonClass)
                 $('#search').click(function() {
 
-                    var queryString = '/search/' + $('#input1:input').val() + '/' + $('#input2:input').val();
+                    var queryString = "result?"  + $('#input1:input').val() + "&" + $('#input2:input').val();
+                    window.location.href = queryString;
+                    
                     console.log(queryString);
 
                     $.get(queryString, {}, function(result){

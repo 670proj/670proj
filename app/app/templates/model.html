@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Music Mining</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png')}}">
+
 <!--
 Strategy Template
 http://www.templatemo.com/tm-489-strategy
@@ -23,48 +25,14 @@ http://www.templatemo.com/tm-489-strategy
 
 
 <body>
+    <a href = '/'> <button type="button" class="cd-btn" style="top:300;right:0;position:fixed;">Back to home!</button></a>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Project</a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li><a href="index" >Home</a></li>
-              <li><a href="model">Model</a></li>
-              <li><a href="artistlist">ArtistList</a></li>
-            </ul>
-        </div>
-    </nav>
+    <p style="text-align:center;"><img src="{{ url_for('static', filename='img/logo_tag.png')}}" ></p>
+     <div class="container-fluid tm-section tm-section-2">
+        <p style="text-align:center;"><img src="{{ url_for('static', filename='img/model_details2.png')}}" border="1"></p>
+    </div>
 
 
- <section class="cd-hero">
-            <ul class="cd-hero-slider autoplay">  
-            <!-- 
-                <ul class="cd-hero-slider autoplay"> for slider auto play 
-                <ul class="cd-hero-slider"> for disabled auto play
-            -->
-                <li class="selected">
-                    <div class="cd-full-width">
-<!--                         <div class="tm-slide-content-div">
-                           
-                        </div>  -->                       
-                    </div> 
-                </li>   
-
-                
-            </ul> <!-- .cd-hero-slider -->
-
-            <div class="cd-slider-nav">
-                <nav>
-                    <span class="cd-marker item-1"></span>
-                    
-                    
-                </nav> 
-            </div> <!-- .cd-slider-nav -->
-
-
-        </section> <!-- .cd-hero -->
 
 
 
@@ -72,9 +40,179 @@ http://www.templatemo.com/tm-489-strategy
 
         <div class="jumbotron">
              <h1>Introduction</h1>
-              Anytime you feel Like you just can't hold on Just hold on to my love I'll help you be strong But you're so afraid to lose And baby I can't reach your heart I can't face this world it's keeping us apart And I could be the one to show you Everything you missed before Just hold on now 'Cause I could be the one to give you more [Chorus] Anytime you need a love baby I'm on your side Just let me be the one that can make it all right Anytime you need a love baby you're in my heart I could make it all right I look into your eyes And I feel it coming through I can't help but want you more than I want to So baby take our love your way Cast them all on me That's all I ever wanted was just to make you see But I could be the one to heal you All that you've been searching for Just hold on to my love And baby let me give you more [Chorus] Now there's no way out And I can't help the way I feel 'Cause baby I'm on fire And I'll be waiting right here You know our love isn't real [Chorus]
+              <p>
+                  This tool is aimed to classify music into 5 genres based on the provided pre-processed lyrics with word embedding technique. As a reference, we also plan to run other machine learning methods with our dataset. The basic idea of our approach is to preprocess the lyrics for given songs to feed the preprocessed word vectors the convolutional neural network, and evaluate the predictions to get a model that is able to give accurate predictions at last. Upon the completion of our model with good accuracy, the pre-trained model will be integrated in our web application for online genre prediction
+                  
+              </p>
+
 
          </div>
+        <div class = "jumbotron">
+            <h2>Dataset &amp; Data Process:</h2>
+
+            <p>The dataset we use in this project is a corpus of 55000+ songs lyrics in English from LyricsFreak at<a data-ke-src="http://www.kaggle.com/" href="http://www.kaggle.com/">www.Kaggle.com</a>. The dataset contains 57649 songs, the format&nbsp;is:&nbsp;titles, links, artists&nbsp;and&nbsp;lyrics.</p>
+
+            <p>We get the corresponding genre of each song by using API tool provided by last.fm. After extracting five important genres, we have around 20,000 songs left. To eliminate bias, we make a random copy of some minor genres to make each genre have exactly 6,000 songs.</p>
+
+        </div>
+        <div class = "jumbotron">
+            <h2>Train the Model</h2>
+
+            <p>The model we implement is Convolutional Neural Network applied to song lyrics for music genre classification.</p>
+
+            <p>There are 5 classes / the music genres: rock, pop, classic rock, country, hard rock, jazz, folk,&nbsp;80s, heavy metal.</p>
+
+            <p>Loading data: the data is shuffled and 1% is used as the validation data.</p>
+
+
+            <p>1) Embedding layer:</p>
+
+            <p>We produce lyrics embedding vectors using genism word2vec.</p>
+
+            <p>To make sure all the vectors are of the same length, we plot a graph to observe the distribution of lyric-length among the corpus of songs. The following graph shows that most songs have a lyric-length smaller than 500-words, so we set the vector size, defined by thepadding_size, to 500.</p>
+
+            <p>&nbsp;</p>
+
+            <p style="text-align:center;"><img alt="" data-ke-src="https://lh5.googleusercontent.com/jqd4rMWun08yiTPIAFBdJ67Xn0J7ihhlORmude95uDa_EXNDu0jtLs1ow8lJzuLCoIreuVuWiceGxOmTXYGH61ouxrmMkKwvXJ8NutGLfOrwQNc6DemfZ39FMruYgMhZCm4E6TQG" height="240" src="https://lh5.googleusercontent.com/jqd4rMWun08yiTPIAFBdJ67Xn0J7ihhlORmude95uDa_EXNDu0jtLs1ow8lJzuLCoIreuVuWiceGxOmTXYGH61ouxrmMkKwvXJ8NutGLfOrwQNc6DemfZ39FMruYgMhZCm4E6TQG" width="394" /></p>
+
+            <p>&nbsp;</p>
+
+            <p>2) Convolution &amp; Max-pooling layer:</p>
+
+            <p>This layer performs convolutions over the embedded lyrics vectors using multiple filter sizes. Then, we max-pool the result of the convolutional layer into a long feature vector, add dropout regularization, and classify the result using a softmax layer.</p>
+
+
+            <p>3) Dropout layer:</p>
+
+            <p>The fraction of neurons we keep enabled is defined by thedropout_keep_prob. We set it to something like 0.5 during training, and to 1 during evaluation to disable dropout.</p>
+
+
+            <p>4) Predictions:</p>
+
+            <p>We use the feature vector from max-pooling with dropout applied to generate predictions by doing a matrix multiplication and picking the class with the highest score.</p>
+
+
+        </div>
+
+        <div class = "jumbotron">
+            <h2>Visualization of the Network:</h2>
+
+            <p>The structure of our network is visulized by tensorboard. We used different sizes of covolution filters, which are 3 by 100, 4 by 100 and 5 by 100. These correspond to n-gram model and enable CNN model to study the realtionship between words. </p>
+
+            <p>The max-pooling step will give us the most important information from each n-gram. After max-pooling step, we will concatenate the results together and send them to fully-connected layer to do predictions.</p>
+
+            <p>&nbsp;</p>
+
+            <p style="text-align:center;"><img alt="" data-ke-src="https://lh3.googleusercontent.com/lxwweQ6h7RNTz1jXyu0FtZEQZFl094BZF8WIVJWaW-yPJ0yYHYsTYlrg-GU-LxBUOGW7KDpXn_wQfUYXBT9lh-vCfFq7hOQ_W2AIzUSWqTXbZDuY6UFvyEavI4W7FroVNNJXoDoe" height="340" src="https://lh3.googleusercontent.com/lxwweQ6h7RNTz1jXyu0FtZEQZFl094BZF8WIVJWaW-yPJ0yYHYsTYlrg-GU-LxBUOGW7KDpXn_wQfUYXBT9lh-vCfFq7hOQ_W2AIzUSWqTXbZDuY6UFvyEavI4W7FroVNNJXoDoe" width="624" /></p>
+
+            <p>&nbsp;</p>
+
+
+            <p>The following is the detailed image of our network.</p>
+
+
+            <p>&nbsp;</p>
+
+            <p style="text-align:center;"><img alt="" src="{{ url_for('static', filename='img/CNNmodel.png')}}" width="624" /></p>
+        </div>
+        <div class = "jumbotron">
+            <h2>Evaluation:</h2>
+
+            <p>1) We use cross-entropy loss, the standard loss function for category classification model, as the loss function.</p>
+
+            <p>Cross-entropy loss increases as the predicted probability&nbsp;diverges&nbsp;from the actual label, so a perfect model would have a cross-entropy loss of 0.</p>
+
+            <p>&nbsp;</p>
+
+            <p>for each class, given our scores and the correct input labels. We take the mean of the losses. We don&rsquo;t use the sum, because using sum will make it harder to compare the loss across different batch sizes and train/validation data.</p>
+
+            <p>The following graph shows the cross-entropy loss of our model.</p>
+
+            <p style="text-align:center;"><img alt="" data-ke-src="https://lh5.googleusercontent.com/0tBxhlm6wO7ArSmxjYx0QpqlXNh40Icao8EnHOT8BB3Ien9FVeNz5In0lroc5_yh8ZhWixwlBM4DBEGY2znuaiV2k6pNRzwMeEEOmjXGWlu4wE3SrkJvCOihiS7YD6q5UPm0wzuu" height="278" src="https://lh5.googleusercontent.com/0tBxhlm6wO7ArSmxjYx0QpqlXNh40Icao8EnHOT8BB3Ien9FVeNz5In0lroc5_yh8ZhWixwlBM4DBEGY2znuaiV2k6pNRzwMeEEOmjXGWlu4wE3SrkJvCOihiS7YD6q5UPm0wzuu" width="380" /></p>
+
+            <p>We also define a function to calculate the accuracy to keep track of how the loss and accuracy evolve during training and testing. Running the training procedure with default parameters results in the following accuracy plots.</p>
+
+            <p style="text-align:center;"><img alt="" data-ke-src="https://lh4.googleusercontent.com/fglHA5ybnEu_enmqJUbyC0b5fZ1Gf2TbzazKX_zJ-OtpDkTPEf3uTTBmLCrWiyUs3lrwFK1S5WcdJq57hIvvS51lDmEy1jVawT24vAVn63t5loX4bY1wpAo_W1o6xqKpNYtpj2qC" height="269" src="https://lh4.googleusercontent.com/fglHA5ybnEu_enmqJUbyC0b5fZ1Gf2TbzazKX_zJ-OtpDkTPEf3uTTBmLCrWiyUs3lrwFK1S5WcdJq57hIvvS51lDmEy1jVawT24vAVn63t5loX4bY1wpAo_W1o6xqKpNYtpj2qC" width="376" /></p>
+
+            <p>&nbsp;</p>
+
+            <p>Another TensorFlow feature we use is the checkpointing, the parameters of our model are saved so we can restore them later on.</p>
+
+            <p>&nbsp;</p>
+
+            <p>2) Analyze:</p>
+
+            <p>Our training metrics are not smooth because we use small batch sizes. If we used larger batches (or evaluated on the whole training set), we would get a smoother blue line.</p>
+
+            <p>&nbsp;</p>
+
+            <p style="text-align:center;"><img alt="" data-ke-src="https://lh6.googleusercontent.com/nWbp8vw9LB8WJ3_gIn0lwvqIzWaUiee3fY6pn00M8GQ-ztUk7cragygMWUBL4T5tUaZ49gOvKW7eIh3jkdEQubfXq5fFh3l1NDLPT8KcqI-an8UNns17mIAIs8rxX742Gv8yT35w" height="278" src="https://lh6.googleusercontent.com/nWbp8vw9LB8WJ3_gIn0lwvqIzWaUiee3fY6pn00M8GQ-ztUk7cragygMWUBL4T5tUaZ49gOvKW7eIh3jkdEQubfXq5fFh3l1NDLPT8KcqI-an8UNns17mIAIs8rxX742Gv8yT35w" width="389" /><img alt="" data-ke-src="https://lh6.googleusercontent.com/c-B9xS8To5bQPob1PjvVHO9BSt2AD8ToN3Y0tsAnXUhM-N8slAZjJGC1I7W--H3kclj7sfu3RIWlCycQDjNcM7Dr1d1MJPqAJgQcnCW7XpKzHjrsfu7NHn0daOn6WaKVSiZGFDvZ" height="278" src="https://lh6.googleusercontent.com/c-B9xS8To5bQPob1PjvVHO9BSt2AD8ToN3Y0tsAnXUhM-N8slAZjJGC1I7W--H3kclj7sfu3RIWlCycQDjNcM7Dr1d1MJPqAJgQcnCW7XpKzHjrsfu7NHn0daOn6WaKVSiZGFDvZ" width="395" /></p>
+
+            <p>Because validation accuracy is significantly below training accuracy it seems like our network is overfitting the training data, suggesting that we need more data (the dataset we used is very small), stronger regularization, or fewer model parameters. The training loss and accuracy starts out significantly below the validation metrics due to dropout applied to it.</p>
+
+            <p>&nbsp;</p>
+        </div>
+        <div class = "jumbotron">
+
+            <h2>Comparisons of different models:</h2>
+
+            <p>&nbsp;</p>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                        <p>Model</p>
+                        </td>
+                        <td>
+                        <p>Results</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <p>Bayes</p>
+                        </td>
+                        <td>
+                        <p>36%</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <p>SVM</p>
+                        </td>
+                        <td>
+                        <p>27%</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <p>Decision Tree</p>
+                        </td>
+                        <td>
+                        <p>22%</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <p>CNN</p>
+                        </td>
+                        <td>
+                        <p>82%</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>&nbsp;</p>
+        </div>
+        <div class = "jumbotron">
+
+            <h2>Conclusion:</h2>
+
+            <p>In this project,  our team is aimed to build an automated web application and integrate a pretrained CNN model in our application to assist the user find the Song genre from the Lyric input. In the web application, the data is saved to the local database in the backend and display the song data information on the web page and dynamically predict the song genre according to the song lyric information .  To find an appropriate model for our Song genres,  we studied  different machine learning models from both traditional machine learning model and deep neural network model. </p>
+
+            <p>We found the proposed neural network model based on CNN provides comparatively good accuracy of 82% in comparison with Naive Bayes 36%, SVM 27%, and Decision Tree 22%. In our model, we have preprocessed the Lyric data with word embedding method and then load the processed data into the 3 layer convolutional neural network together fully connected layer for classification.  The accuracy from test data is slightly lower than the training accuracy as expected to account for the possible overfitting problem. In the preprocessing stage, we have handled the data imbalance issues by increasing small group data to the average.  The drawback of our model is that our dataset is not big enough, so we are expecting the overfitting issues for newly unseen data. Also, the genre types for songs are quite large and some genres have huge amount of data while others are small, so we have compressed the small genre types into big genre types to regroup our genres.</p>
+        </div>
 
     </div>
 

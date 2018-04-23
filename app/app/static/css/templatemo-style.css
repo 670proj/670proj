@@ -45,8 +45,8 @@ a:focus {
 }
 
 .cd-hero-slider li:first-of-type { background-image: url('../img/background.png'); }
-.cd-hero-slider li:nth-of-type(2) {	background-image: url('../img/top-bg-2.jpg'); }
-.cd-hero-slider li:nth-of-type(3) {	background-image: url('../img/top-bg-3.jpg'); }
+.cd-hero-slider li:nth-of-type(2) {	background-image: url('../img/cassette_2.png'); }
+.cd-hero-slider li:nth-of-type(3) {	background-image: url('../img/cassette_2.png'); }
 
 .cd-slider-nav { background-color: transparent; }
 
@@ -292,8 +292,9 @@ a:focus {
 }
 
 .carousel-indicators li { 
-	background-color: rgb(158,158,158); 
+	background-color: rgb(63,63,103); 
 	margin: 0;
+	box-shadow: inset 1px 1px 1px 1px rgb(63,63,103);
 }
 
 .carousel-indicators .active { background-color: #CBCBCB; }

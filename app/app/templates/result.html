@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  
+        <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.5.0/css/font-awesome.min.css') }}">        
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">                                
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/hero-slider-style.css') }}">  
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">  
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-style.css') }}">  
+
+        <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+<title>Music Mining</title>
+<link rel="icon" href="{{ url_for('static', filename='img/logo.png')}}">
+
+</head>
+<body>
+
+<a href = '/'> <button type="button" class="cd-btn" style="top:300;right:0;position:fixed;">Back to home!</button></a>
+
+
+<div class="container-fluid tm-section tm-section-2">
+        <h4>This is your song</h4>
+
+        <div class="jumbotron" id = 'lyric'>
+         {%if keys%}   
+         {% for key in keys  %}
+            <div class='row tm-media-row'> 
+                <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'>
+                    {{key}}
+                </div>
+                
+                <div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+                    {{data[key]}}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        <div class='row tm-media-row'> 
+            <div class='col-xs-4 col-sm-6 col-md-4 col-lg-4'>
+                <button class='btn btn-success' id='runclassificaiton'>Classificaiton</button>
+            </div>
+            <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                <span id ='classificationRes' style='color:red'>To Be Classified! </span>
+            </div>
+        </div>
+        {% else %}
+            <h3>Sorry, inputs wrong!</h3>
+        {% endif %}
+
+        </div>
+</div>
+
+
+<section class="tm-bg-purple tm-section">
+        <div class="container-fluid tm-section-5-inner">
+            <div class="row">
+                <footer class="col-xs-12 text-xs-center">
+                    <p class="tm-text-white tm-copyright-text">Copyright &copy; 2018 Texas A&M University CS670 course
+                    | Designed by <a rel="nofollow" href="http://www.google.com/+templatemo" target="_parent"> CS course</a></p>
+                </footer>
+            </div>
+        </div>
+</section>
+
+<script src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>             <!-- jQuery (https://jquery.com/download/) -->
+<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> <!-- Tether for Bootstrap (http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h) --> 
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>                 <!-- Bootstrap js (v4-alpha.getbootstrap.com/) -->
+<script src="{{url_for('static', filename='js/hero-slider-script.js')}}"></script>            <!-- Hero slider (https://codyhouse.co/gem/hero-slider/) -->
+<script src="{{url_for('static', filename='js/jquery.touchSwipe.min.js')}}"></script> 
+
+<script>
+
+    $('#runclassificaiton').click(function(){
+
+         // var queryString = "/runCNN/{{data[keys[0]]}}/{{data[keys[1]]}}"
+         
+         // console.log(queryString)
+
+          $.ajax(
+          {
+                url: '/runCNN', 
+                type: 'GET',
+                data: {
+                    'song': "{{data[keys[0]]}}",
+                    'artist': "{{data[keys[1]]}}"  
+                },
+                success: function(result){
+
+                    console.log(result);
+
+                    $('#classificationRes').html(result);
+                },
+                error: function(xhr) {
+                    console.log('error detected');
+                }
+          });
+    });
+
+</script>
+</body>
+</html>
