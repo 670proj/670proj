@@ -5,7 +5,7 @@ import numpy as np
 class TextCNN(object):
     def __init__(self, padding_size=500, 
                  embedding_size=100, 
-                 file_path='matrix3/', 
+                 file_path='/Users/HJK-BD/Downloads/model/matrix3', 
                  num_classes=5, filter_sizes = [2,3,4], num_filters = 128, dropout_keep_prob = 0.5, l2_reg_lambda = 0.0):
         
         self.input_x = tf.placeholder(tf.float32, [None, padding_size, embedding_size, 1], name="input_x")
